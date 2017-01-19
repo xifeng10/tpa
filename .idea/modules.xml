@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/tpa.iml" filepath="$PROJECT_DIR$/tpa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tpa-agriculture-web/tpa-agriculture-web.iml" filepath="$PROJECT_DIR$/tpa-agriculture-web/tpa-agriculture-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tpa-common/tpa-common.iml" filepath="$PROJECT_DIR$/tpa-common/tpa-common.iml" />
+    </modules>
+  </component>
+</project>
