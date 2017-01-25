@@ -30,7 +30,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.wondersgroup.tpa</groupId>
+            <groupId>com.wondersgroup.util</groupId>
             <artifactId>tpa-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -112,9 +112,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork><!-- 如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart -->
-                </configuration>
+                <!--<configuration>-->
+                    <!--<fork>true</fork>&lt;!&ndash; 如果没有该项配置，肯呢个devtools不会起作用，即应用不会restart &ndash;&gt;-->
+                <!--</configuration>-->
                 <dependencies>
                     <dependency>
                         <groupId>org.springframework</groupId>

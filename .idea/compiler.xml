@@ -8,12 +8,16 @@
         <outputRelativeToContentRoot value="true" />
         <module name="tpa-agriculture-web" />
         <module name="tpa-common" />
+        <module name="tpa-security" />
+        <module name="tpa-test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="tpa" target="1.8" />
       <module name="tpa-agriculture-web" target="1.8" />
       <module name="tpa-common" target="1.8" />
+      <module name="tpa-security" target="1.8" />
+      <module name="tpa-test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

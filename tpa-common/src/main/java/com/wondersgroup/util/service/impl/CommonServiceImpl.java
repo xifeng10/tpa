@@ -79,25 +79,23 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
     /**
      * @param entity
      * @return void
-     * @throws
      * @Title: save
      * @author 陈希峰 chenxf10@126.com
      * @Description: 新增
      */
-    public void save(T entity) throws Exception {
-        getMapper().insert(entity);
+    public int save(T entity) {
+        return getMapper().insert(entity);
     }
 
     /**
      * @param entity
      * @return void
-     * @throws
      * @Title: delete
      * @author 陈希峰 chenxf10@126.com
      * @Description: 根据主键删除
      */
-    public void delete(T entity) {
-        getMapper().delete(entity);
+    public int delete(T entity) {
+        return getMapper().delete(entity);
     }
 
     /**
@@ -107,8 +105,8 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @author 陈希峰 chenxf10@126.com
      * @Description 根据主键删除对象
      */
-    public void delete(Serializable id) throws Exception {
-        getMapper().deleteByPrimaryKey(id);
+    public int delete(Serializable id) {
+        return getMapper().deleteByPrimaryKey(id);
     }
 
     /**
@@ -126,13 +124,12 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
     /**
      * @param entity
      * @return void
-     * @throws
      * @Title: update
      * @author 陈希峰 chenxf10@126.com
      * @Description: 修改
      */
-    public void update(T entity) throws Exception {
-        getMapper().updateByPrimaryKeySelective(entity);
+    public int update(T entity) {
+        return getMapper().updateByPrimaryKeySelective(entity);
     }
 
     /**
@@ -165,8 +162,8 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @author 陈希峰 chenxf10@126.com
      * @Description 批量添加
      */
-    public void saveAll(List<T> List) throws Exception {
-        getMapper().insertList(List);
+    public int saveAll(List<T> List) {
+        return getMapper().insertList(List);
     }
 
     /**
@@ -178,10 +175,10 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @author 陈希峰 chenxf10@126.com
      * @Description 安装通用Example进行分页查询
      */
-    protected Page<T> queryByExampleByPage(Page<T> page, Example example) {
+    public Page<T> queryByExampleByPage(Page<T> page, Example example) {
 
-        if(page==null){
-            page=new Page<T>();
+        if (page == null) {
+            page = new Page<T>();
         }
         PageHelper.startPage(page.getCurrentPage(), page.getSizeOfPerPage());
         List<T> results = null;
@@ -205,8 +202,8 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @Description 分页查询
      */
     public Page<T> queryAllByPage(Page<T> page) {
-        if(page==null){
-            page=new Page<T>();
+        if (page == null) {
+            page = new Page<T>();
         }
         PageHelper.startPage(page.getCurrentPage(), page.getSizeOfPerPage());
         List<T> results = null;

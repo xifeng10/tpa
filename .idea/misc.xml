@@ -8,6 +8,8 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/tpa-common/pom.xml" />
+        <option value="$PROJECT_DIR$/tpa-security/pom.xml" />
+        <option value="$PROJECT_DIR$/tpa-test/pom.xml" />
       </list>
     </option>
   </component>
