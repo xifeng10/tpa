@@ -13,7 +13,8 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-
+        $(".navbar-nav li").removeClass("active");
+        $("#roleManagerLi").addClass("active");
         var editOptions = {
             mtype: "PUT",
             closeAfterEdit: true,

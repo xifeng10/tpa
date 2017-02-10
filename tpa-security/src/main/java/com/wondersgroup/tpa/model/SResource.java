@@ -9,7 +9,7 @@ public class SResource extends BaseKey {
 
     private String name;
 
-    private String 菜单url;
+    private String menuUrl;
 
     private String securityUrl;
 
@@ -55,12 +55,12 @@ public class SResource extends BaseKey {
         this.name = name == null ? null : name.trim();
     }
 
-    public String get菜单url() {
-        return 菜单url;
+    public String getMenuUrl() {
+        return menuUrl;
     }
 
-    public void set菜单url(String 菜单url) {
-        this.菜单url = 菜单url == null ? null : 菜单url.trim();
+    public void setMenuUrl(String menuUrl) {
+        this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 
     public String getSecurityUrl() {

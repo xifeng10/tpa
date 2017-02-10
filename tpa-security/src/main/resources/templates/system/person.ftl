@@ -16,6 +16,8 @@
 
     $(document).ready(function () {
 
+        $(".navbar-nav li").removeClass("active");
+        $("#personManagerLi").addClass("active");
         var editOptions = {
             mtype: "PUT",
             closeAfterEdit: true,

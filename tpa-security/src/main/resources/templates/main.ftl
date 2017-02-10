@@ -59,10 +59,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="${request.contextPath}/system/person">人员管理</a></li>
-                    <li><a href="${request.contextPath}/system/employee">用户管理</a></li>
-                    <li><a href="${request.contextPath}/system/role">角色管理</a></li>
-                    <li><a href="${request.contextPath}/system/resource">资源管理</a></li>
+                    <li id="personManagerLi"><a href="${request.contextPath}/system/person">人员管理</a></li>
+                    <li id="employeeManagerLi"><a href="${request.contextPath}/system/employee">用户管理</a></li>
+                    <li id="roleManagerLi"><a href="${request.contextPath}/system/role">角色管理</a></li>
+                    <li id="resourceManagerLi"><a href="${request.contextPath}/system/resource">资源管理</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">板块 <span
                                 class="caret"></span></a>
