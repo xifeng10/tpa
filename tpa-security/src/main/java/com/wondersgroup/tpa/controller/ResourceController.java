@@ -7,9 +7,7 @@ import com.wondersgroup.util.util.Page;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,13 +35,10 @@ public class ResourceController extends BaseRestSpringController<SResource, Long
         return new ModelAndView("system/resource");
     }
 
-    @Override
-    public Object page(HttpServletRequest request, HttpServletResponse response, Page page, SResource model) {
-        if (page == null) {
-            page = new Page();
-            page.setSizeOfPerPage(Integer.MAX_VALUE);
-        }
-        return resourceService.queryAllByPage(page);
+    @RequestMapping(value = "/queryAll",method = {RequestMethod.POST,RequestMethod.GET})
+    @ResponseBody
+    public Object queryAll() {
+        return resourceService.findAll();
     }
 
     @Override
@@ -51,7 +46,7 @@ public class ResourceController extends BaseRestSpringController<SResource, Long
         model.setCreateBy(1l);
         model.setCreateTime(new Date());
         resourceService.save(model);
-        return SUCCESS;
+        return model;
     }
 
     @Override
@@ -62,7 +57,8 @@ public class ResourceController extends BaseRestSpringController<SResource, Long
         model.setCreateBy(resource.getCreateBy());
         model.setUpdateBy(1l);
         model.setUpdateTime(new Date());
-        return super.update(id, request, response, model);
+        resourceService.update(model);
+        return model;
     }
 
     @Override

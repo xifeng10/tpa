@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/tpa-common/tpa-common.iml" filepath="$PROJECT_DIR$/tpa-common/tpa-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/tpa-security/tpa-security.iml" filepath="$PROJECT_DIR$/tpa-security/tpa-security.iml" />
       <module fileurl="file://$PROJECT_DIR$/tpa-test/tpa-test.iml" filepath="$PROJECT_DIR$/tpa-test/tpa-test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tpa-test/tpa-test.iml" filepath="$PROJECT_DIR$/tpa-test/tpa-test.iml" />
     </modules>
   </component>
 </project>

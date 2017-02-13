@@ -1,5 +1,7 @@
 package com.wondersgroup.tpa.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.Date;
 
 public class SResource extends BaseKey {
@@ -39,6 +41,7 @@ public class SResource extends BaseKey {
         this.type = type;
     }
 
+    @JSONField(name = "pId")
     public Long getParentId() {
         return parentId;
     }
@@ -55,11 +58,11 @@ public class SResource extends BaseKey {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getMenuUrl() {
+    public String getMenuUrlurl() {
         return menuUrl;
     }
 
-    public void setMenuUrl(String menuUrl) {
+    public void setmurl(String menuUrl) {
         this.menuUrl = menuUrl == null ? null : menuUrl.trim();
     }
 

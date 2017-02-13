@@ -8,6 +8,14 @@ tpa:
 logging:
     level:
         tk.mybatis: DEBUG
+        com.ibatis: DEBUG
+        com.wondersgroup.tpa.mapper: DEBUG
+        com.ibatis.common.jdbc.SimpleDataSource: debug
+        com.ibatis.common.jdbc.ScriptRunner: debug
+        com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate: debug
+        java.sql.Connection: debug
+        java.sql.Statement: debug
+        java.sql.PreparedStatement: debug
 
 spring:
     datasource:

@@ -37,7 +37,7 @@
         <commons-lang3.version>3.5</commons-lang3.version>
         <sitemesh.version>3.0.1</sitemesh.version>
         <druid.version>1.0.27</druid.version>
-        <spring-boot.version>1.4.3.RELEASE</spring-boot.version>
+        <spring-boot.version>1.5.1.RELEASE</spring-boot.version>
     </properties>
     <dependencyManagement>
         <dependencies>
