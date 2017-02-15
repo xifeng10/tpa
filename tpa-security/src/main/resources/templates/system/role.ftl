@@ -52,6 +52,14 @@
                 },
                 {label: '名称', name: 'name', width: 160, editable: true},
                 {
+                    label: '创建时间',
+                    name: 'createTime',
+                    width: 80,
+                    editable: false,
+                    formatter: "date",
+                    formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s'}
+                },
+                {
                     label: '资源选择', name: 'resourceIds', hidden: true, editable: true,edittype: "custom",
                     editoptions: {
                         custom_value: getFreightElementValue,
@@ -61,14 +69,6 @@
                         edithidden: true,
                         required: false
                     }
-                },
-                {
-                    label: '创建时间',
-                    name: 'createTime',
-                    width: 80,
-                    editable: false,
-                    formatter: "date",
-                    formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s'}
                 }
             ],
             viewrecords: true, // show the current page, data rang and total records on the toolbar
@@ -91,7 +91,7 @@
         );
 
         function createFreightEditElement(value, editOptions) {
-            var div =$("<div><ul id='roleResources' class='ztree'></ul></div>");
+            var div =$("<div style='margin-bottom:5px;margin-top:-16px;'><ul id='roleResources' class='ztree'></ul></div>");
             var setting = {
                 check : {
                     enable : true,
@@ -148,13 +148,11 @@
                 $.each(nodes,function(index,item){
                     ids.push(item.id);
                 })
-                console.log(ids.join());
                 return ids.join();
             }
         }
         function checkNodeByRoleId(v_roleId) {
             $.post("${request.contextPath}/system/resource/queryByRoleId.json?${_csrf.parameterName!''}=${_csrf.token!''}", {roleId: v_roleId}, function (response, status, xhr) {
-                console.log(response);
                 var treeObj = $.fn.zTree.getZTreeObj("roleResources");
                 treeObj.checkAllNodes(false);
                 var node;

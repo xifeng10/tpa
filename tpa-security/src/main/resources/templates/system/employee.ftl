@@ -184,7 +184,6 @@
         // One parameter passed - the custom element created in JQGridColumn.EditTypeCustomCreateElement
         function getFreightElementValue(elem, oper, value) {
             if (oper === "set") {
-
                 var id=$("#id").val();
                 if(id) {
                     checkNodeByEmployeeId(id);
@@ -192,7 +191,6 @@
             }
 
             if (oper === "get") {
-                console.log($("input[type=checkbox][name=roleId]:checked").val());
                 var ids=new Array();
                 $.each($("input[type=checkbox][name=roleId]:checked"),function(index,item){
                     ids.push($(this).val());

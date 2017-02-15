@@ -26,9 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private FilterInvocationSecurityMetadataSourceService securityMetadataSourceService;
     @Autowired
     private SecurityAccessDecisionManager accessDecisionManager;
-//    @Autowired
-//    private IEmployeeService employeeService;
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -36,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin();
         http
                 .authorizeRequests()
-//                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/", "/home").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

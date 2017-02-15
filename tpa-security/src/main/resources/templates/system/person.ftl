@@ -63,11 +63,6 @@
                     edittype: "text",
                     editoptions: {
                         dataInit: function (element) {
-//                            $(element).datepicker({
-//                                autoclose: true,
-//                                format: 'yyyy-mm-dd',
-//                                orientation: 'bottom'
-//                            });
                             $(element).click(function(){
                                 WdatePicker();
                             });
