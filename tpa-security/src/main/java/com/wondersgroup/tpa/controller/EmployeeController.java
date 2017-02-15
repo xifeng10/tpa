@@ -12,15 +12,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -71,23 +70,43 @@ public class EmployeeController extends BaseRestSpringController<SEmployee, Long
 //            throw new Exception("该人员已经存在工作信息！");
             return returnMap;
         }else {
-            model.setCreateBy(1l);
-//            model.setCreateBy(((SEmployee) SecurityContextHolder.getContext().getAuthentication()
-//                    .getPrincipal()).getId());
+//            model.setCreateBy(1l);
+            model.setCreateBy(((SEmployee) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal()).getId());
 
             model.setCreateTime(new Date());
             model.setPassword(ENCODER.encodePassword(tpaProperties.getDefaultPassword(),	model.getUsername()));
-            employeeService.save(model);
+            employeeService.save(model,analysisRoleIds(request));
             return SUCCESS;
         }
 
     }
 
     @Override
-    public Object update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, SEmployee model) throws Exception {
-        return super.update(id, request, response, model);
+    public Object update(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, SEmployee employee) throws Exception {
+        employee.setUpdateBy(((SEmployee) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal()).getId());
+        employee.setUpdateTime(new Date());
+        employeeService.update(employee,analysisRoleIds(request));
+        return SUCCESS;
     }
 
+    /**
+     * 解析roleIds
+     * @param request
+     * @return
+     */
+    private List<Long> analysisRoleIds(HttpServletRequest request){
+        List<Long> resourceIds = new ArrayList<>();
+        String str = request.getParameter("roleIds");
+        if(!StringUtils.isEmpty(str)){
+            String[] ids = str.split(",");
+            for(String s:ids){
+                resourceIds.add(Long.parseLong(s));
+            }
+        }
+        return resourceIds;
+    }
     @Override
     public Object delete(@PathVariable Long id) {
         return super.delete(id);

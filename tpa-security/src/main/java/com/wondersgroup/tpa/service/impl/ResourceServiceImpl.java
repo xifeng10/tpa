@@ -35,4 +35,9 @@ public class ResourceServiceImpl extends CommonServiceImpl<SResource> implements
         example.setOrderByClause("parent_id , show_index ");
         return resourceMapper.selectByExample(example);
     }
+
+    @Override
+    public List<SResource> queryByRoleId(Long roleId) {
+        return resourceMapper.queryByRoleId(roleId);
+    }
 }

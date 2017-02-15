@@ -5,13 +5,13 @@
     <title>TPA-
         <sitemesh:write property='title'/>
     </title>
-    <script type="text/ecmascript" src="${request.contextPath}/static/js/jquery-1.11.1.min.js"></script>
-    <script type="text/ecmascript" src="${request.contextPath}/static/js/msg.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/static/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/static/js/msg.js"></script>
     <!-- We support more than 40 localizations -->
-    <script type="text/ecmascript" src="${request.contextPath}/static/js/i18n/grid.locale-cn.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/static/js/i18n/grid.locale-cn.js"></script>
     <!-- This is the Javascript file of jqGrid -->
-    <script type="text/ecmascript" src="${request.contextPath}/static/js/jquery.jqGrid.min.js"></script>
-    <script type="text/ecmascript" src="${request.contextPath}/static/js/jqgrid.extend.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/static/js/jquery.jqGrid.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/static/js/jqgrid.extend.js"></script>
     <!-- This is the localization file of the grid controlling messages, labels, etc.
     <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
     <link rel="stylesheet" href="${request.contextPath}/static/css/bootstrap.min.css">
@@ -26,7 +26,7 @@
         $.jgrid.defaults.height = 560;
         $.jgrid.defaults.styleUI = 'Bootstrap';
     </script>
-    <script src="${request.contextPath}/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/static/js/bootstrap.min.js"></script>
     <style type="text/css">
         .navbar {
             margin-bottom: 0px;

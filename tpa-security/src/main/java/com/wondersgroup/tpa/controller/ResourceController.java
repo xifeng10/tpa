@@ -35,6 +35,12 @@ public class ResourceController extends BaseRestSpringController<SResource, Long
         return new ModelAndView("system/resource");
     }
 
+    @RequestMapping(value = "/queryByRoleId")
+    @ResponseBody
+    public Object queryByRoleId(Long roleId) {
+        return resourceService.queryByRoleId(roleId);
+    }
+
     @RequestMapping(value = "/queryAll",method = {RequestMethod.POST,RequestMethod.GET})
     @ResponseBody
     public Object queryAll() {

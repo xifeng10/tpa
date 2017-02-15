@@ -14,8 +14,8 @@
 </#if>
 
 <form action="${login!'login'}" method="post">
-    <div><label> 用户名 : <input type="text" name="username" value="user"/> </label></div>
-    <div><label> 密 码 : <input type="password" name="password" value="password"/> </label></div>
+    <div><label> 用户名 : <input type="text" name="username" value="admin"/> </label></div>
+    <div><label> 密 码 : <input type="password" name="password" value="123456"/> </label></div>
     <div><input type="submit" value="登录"/></div>
     <input type="hidden" name="${_csrf.parameterName!''}" value="${_csrf.token!''}"/>
 </form>

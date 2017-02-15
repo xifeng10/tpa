@@ -129,7 +129,18 @@
                     editable: false,
                     formatter: "date",
                     formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s'}
-                }
+                },
+                {
+                    label: '角色选择', name: 'roleIds', hidden: true, editable: true,edittype: "custom",
+                    editoptions: {
+                        custom_value: getFreightElementValue,
+                        custom_element: createFreightEditElement
+                    },
+                    editrules: {
+                        edithidden: true,
+                        required: false
+                    }
+                },
             ],
             viewrecords: true, // show the current page, data rang and total records on the toolbar
             rowNum: 30,
@@ -149,6 +160,55 @@
                 delOptions,
                 {} // search options
         );
+
+        function createFreightEditElement(value, editOptions) {
+            var html=$("<div style='margin-bottom:5px;margin-top:-16px;'></div>");
+            $.post("${request.contextPath}/system/role/queryAll.json?${_csrf.parameterName!''}=${_csrf.token!''}",{},function (response, status, xhr) {
+                var label,checkbox;
+                $.each(response,function (index, item) {
+                    label=$("<label class='checkbox-inline'></label>");
+                    checkbox = $("<input>", { type: "checkbox", value: item.id, name: "roleId",style:"width:16px;", checked: value == item.id });
+                    label.append(checkbox).append(item.name);
+                    html.append(label);
+                })
+                var rowId = editOptions.rowId;
+                if("_empty"!=rowId){
+                    var rowData = $("#jqGrid").jqGrid("getRowData", rowId);
+                    checkNodeByEmployeeId(rowData.id);
+                }
+            },'json')
+            return html;
+        }
+
+        // The javascript executed specified by JQGridColumn.EditTypeCustomGetValue when EditType = EditType.Custom
+        // One parameter passed - the custom element created in JQGridColumn.EditTypeCustomCreateElement
+        function getFreightElementValue(elem, oper, value) {
+            if (oper === "set") {
+
+                var id=$("#id").val();
+                if(id) {
+                    checkNodeByEmployeeId(id);
+                }
+            }
+
+            if (oper === "get") {
+                console.log($("input[type=checkbox][name=roleId]:checked").val());
+                var ids=new Array();
+                $.each($("input[type=checkbox][name=roleId]:checked"),function(index,item){
+                    ids.push($(this).val());
+                })
+                return ids.join();
+            }
+        }
+        function checkNodeByEmployeeId(v_roleId) {
+            $.post("${request.contextPath}/system/role/queryByEmployeeId.json?${_csrf.parameterName!''}=${_csrf.token!''}", {employeeId: v_roleId}, function (response, status, xhr) {
+                $("input[type=checkbox][name=roleId]").removeAttr("checked");
+
+                $.each(response,function (index, item) {
+                    $("input[type=checkbox][name=roleId][value="+item.id+"]").prop("checked",true);
+                })
+            }, "json")
+        }
     });
 
 </script>
