@@ -63,6 +63,7 @@
                     <li id="employeeManagerLi"><a href="${request.contextPath}/system/employee">用户管理</a></li>
                     <li id="roleManagerLi"><a href="${request.contextPath}/system/role">角色管理</a></li>
                     <li id="resourceManagerLi"><a href="${request.contextPath}/system/resource">资源管理</a></li>
+                    <li id="resourceManagerLi"><a href="${request.contextPath}/system/method">方法管理</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">板块 <span
                                 class="caret"></span></a>
@@ -80,8 +81,13 @@
                     <button type="button" class="btn btn-default" id="serach-btn">搜索</button>
                 </form>
 
+                <form id="logoutForm" action='${request.contextPath}/logout' method='post'>
+                    <input type="hidden" name="${_csrf.parameterName!''}" value="${_csrf.token!''}"/>
+                </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#login-dialog" data-toggle="modal"><i class="fa fa-sign-in"></i> 登录</a></li>
+                    <li>
+                        <a href="javascript:$('#logoutForm').submit();" data-toggle="modal"><i class="fa fa-sign-in"></i> 退出</a>
+                    </li>
                     <li><a href="#reg-dialog" data-toggle="modal"><i class="fa fa-user-plus"></i> 注册</a></li>
 
                 </ul>

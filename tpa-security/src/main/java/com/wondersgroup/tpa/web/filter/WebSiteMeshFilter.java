@@ -9,6 +9,7 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
         builder.addDecoratorPath("/*", "/main")
                 .addExcludedPath("/main")
+                .addExcludedPath("/login")
                 .addExcludedPath("/static/*");
     }
 }

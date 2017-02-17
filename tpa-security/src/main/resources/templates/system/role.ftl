@@ -47,14 +47,14 @@
             datatype: "json",
             colModel: [
                 {
-                    label: 'ID', name: 'id', width: 75, editable: true,
+                    label: 'ID', name: 'id', width: 160, editable: true,
                     editoptions: {disabled: true, size: 5}
                 },
-                {label: '名称', name: 'name', width: 160, editable: true},
+                {label: '名称', name: 'name', width: 260, editable: true},
                 {
                     label: '创建时间',
                     name: 'createTime',
-                    width: 80,
+                    width: 360,
                     editable: false,
                     formatter: "date",
                     formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s'}
@@ -78,6 +78,7 @@
             jsonReader: {
                 repeatitems: false
             },
+            shrinkToFit:false,
 //            loadonce: true, // this is just for the demo
             pager: "#jqGridPager"
         });

@@ -83,4 +83,9 @@ public class RoleServiceImpl extends CommonServiceImpl<SRole> implements IRoleSe
         }
         saveRoleResource(role.getId(), resourceIds);
     }
+
+    @Override
+    public List<SRole> queryRolesByMethodId(Long id) {
+        return roleMapper.queryRolesByMethodId(id);
+    }
 }

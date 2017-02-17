@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>人员管理</title>
+    <link rel="stylesheet" type="text/css"
+          href="${request.contextPath}/static/css/jquery-ui.min.css"/>
     <script src="${request.contextPath}/static/js/DatePicker/WdatePicker.js" type="text/JavaScript"></script>
 
 </head>
@@ -89,6 +91,7 @@
             jsonReader: {
                 repeatitems: false
             },
+            shrinkToFit:false,
 //            loadonce: true, // this is just for the demo
             pager: "#jqGridPager"
         });

@@ -2,6 +2,7 @@ package com.wondersgroup.tpa.service;
 
 import com.wondersgroup.tpa.model.SEmployee;
 import com.wondersgroup.util.service.ICommonService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,5 +33,6 @@ public interface IEmployeeService extends ICommonService<SEmployee>,UserDetailsS
      * @param model
      * @param roleIds
      */
+    @PreAuthorize("hasAuthority('USER_QUERY')")
     void update(SEmployee model, List<Long> roleIds);
 }

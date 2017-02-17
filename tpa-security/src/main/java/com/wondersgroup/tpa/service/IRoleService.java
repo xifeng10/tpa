@@ -32,4 +32,6 @@ public interface IRoleService extends ICommonService<SRole>{
      * @param resourceIds
      */
     void update(SRole model, List<Long> resourceIds);
+
+    List<SRole> queryRolesByMethodId(Long id);
 }

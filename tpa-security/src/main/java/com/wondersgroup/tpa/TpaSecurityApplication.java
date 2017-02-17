@@ -34,6 +34,16 @@ public class TpaSecurityApplication extends WebMvcConfigurerAdapter {
         return new ModelAndView("main");
     }
 
+    @RequestMapping(value = "/")
+    public ModelAndView index() {
+        return new ModelAndView("index");
+    }
+
+    @RequestMapping(value = "/login")
+    public ModelAndView login() {
+        return new ModelAndView("login");
+    }
+
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         super.configureMessageConverters(converters);

@@ -1,5 +1,6 @@
 package com.wondersgroup.tpa;
 
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import tk.mybatis.mapper.provider.base.BaseSelectProvider;
 
 /**
@@ -8,5 +9,6 @@ import tk.mybatis.mapper.provider.base.BaseSelectProvider;
 public class Test {
     public static void main(String[] args) {
         BaseSelectProvider baseSelectProvider = null;
+//        LogoutFilter
     }
 }

@@ -30,7 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(customFilterSecurityInterceptor(), SwitchUserFilter.class);
-        http.formLogin();
         http
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
@@ -41,6 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
+//                .logoutUrl("/logout")
+//                .logoutSuccessUrl("/login")
                 .permitAll();
     }
 
