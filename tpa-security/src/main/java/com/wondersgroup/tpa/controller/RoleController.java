@@ -76,18 +76,19 @@ public class RoleController extends BaseRestSpringController<SRole, Long> {
         model.setCreateBy(1l);
         model.setCreateTime(new Date());
 
-        roleService.save(model,analysisResourceIds(request));
+        roleService.save(model,analysisLongIds(request,"resourceIds"),analysisLongIds(request,"methodIds"));
         return "success";
     }
 
     /**
      * 解析ResourceIds
      * @param request
+     * @param idName    要解析的Id名称
      * @return
      */
-    private List<Long> analysisResourceIds(HttpServletRequest request){
+    private List<Long> analysisLongIds(HttpServletRequest request,String idName){
         List<Long> resourceIds = new ArrayList<>();
-        String str = request.getParameter("resourceIds");
+        String str = request.getParameter(idName);
         if(!StringUtils.isEmpty(str)){
             String[] ids = str.split(",");
             for(String s:ids){
@@ -105,7 +106,7 @@ public class RoleController extends BaseRestSpringController<SRole, Long> {
             System.out.println(s + "\t-\t" + request.getParameter(s));
         }
         model.setId(id);
-        roleService.update(model,analysisResourceIds(request));
+        roleService.update(model,analysisLongIds(request,"resourceIds"),analysisLongIds(request,"methodIds"));
         return new ModelAndView("system/role");
     }
 

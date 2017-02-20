@@ -25,13 +25,13 @@ public interface IRoleService extends ICommonService<SRole>{
      * @param model
      * @param resourceIds
      */
-    void save(SRole model, List<Long> resourceIds);
+    void save(SRole model, List<Long> resourceIds,List<Long> methodIds);
     /**
      * 修改角色，并修改角色的资源信息
      * @param model
      * @param resourceIds
      */
-    void update(SRole model, List<Long> resourceIds);
+    void update(SRole model, List<Long> resourceIds,List<Long> methodIds);
 
     List<SRole> queryRolesByMethodId(Long id);
 }

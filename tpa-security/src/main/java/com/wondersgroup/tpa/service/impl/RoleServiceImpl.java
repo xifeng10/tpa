@@ -2,9 +2,11 @@ package com.wondersgroup.tpa.service.impl;
 
 import com.wondersgroup.tpa.mapper.SResourceMapper;
 import com.wondersgroup.tpa.mapper.SRoleMapper;
+import com.wondersgroup.tpa.mapper.SRoleMethodMapper;
 import com.wondersgroup.tpa.mapper.SRoleResourceMapper;
 import com.wondersgroup.tpa.model.SResource;
 import com.wondersgroup.tpa.model.SRole;
+import com.wondersgroup.tpa.model.SRoleMethod;
 import com.wondersgroup.tpa.model.SRoleResource;
 import com.wondersgroup.tpa.service.IRoleService;
 import com.wondersgroup.util.mapper.WondersgroupMapper;
@@ -30,6 +32,8 @@ public class RoleServiceImpl extends CommonServiceImpl<SRole> implements IRoleSe
     private SRoleMapper roleMapper;
     @Autowired
     private SRoleResourceMapper roleResourceMapper;
+    @Autowired
+    private SRoleMethodMapper roleMethodMapper;
     @Override
     public WondersgroupMapper<SRole> getMapper() {
         return roleMapper;
@@ -46,10 +50,10 @@ public class RoleServiceImpl extends CommonServiceImpl<SRole> implements IRoleSe
     }
 
     @Override
-    public void save(SRole model, List<Long> resourceIds) {
+    public void save(SRole model, List<Long> resourceIds,List<Long> methodIds) {
         roleMapper.insert(model);
         if(resourceIds!=null){
-            saveRoleResource(model.getId(), resourceIds);
+            saveRoleResource(model.getId(), resourceIds,methodIds);
         }
     }
 
@@ -58,7 +62,7 @@ public class RoleServiceImpl extends CommonServiceImpl<SRole> implements IRoleSe
      * @param roleId
      * @param resourceIds
      */
-    private void saveRoleResource(Long roleId, List<Long> resourceIds) {
+    private void saveRoleResource(Long roleId, List<Long> resourceIds,List<Long> methodIds) {
         SRoleResource roleResource;
         for(Long resourceId:resourceIds){
             roleResource=new SRoleResource();
@@ -66,10 +70,17 @@ public class RoleServiceImpl extends CommonServiceImpl<SRole> implements IRoleSe
             roleResource.setResourceId(resourceId);
             roleResourceMapper.insert(roleResource);
         }
+        SRoleMethod roleMethod;
+        for(Long methodId:methodIds){
+            roleMethod=new SRoleMethod();
+            roleMethod.setRoleId(roleId);
+            roleMethod.setMethodId(methodId);
+            roleMethodMapper.insert(roleMethod);
+        }
     }
 
     @Override
-    public void update(SRole role, List<Long> resourceIds) {
+    public void update(SRole role, List<Long> resourceIds,List<Long> methodIds) {
         roleMapper.updateByPrimaryKeySelective(role);
         SRoleResource roleResource = new SRoleResource();
         roleResource.setRoleId(role.getId());
@@ -81,7 +92,17 @@ public class RoleServiceImpl extends CommonServiceImpl<SRole> implements IRoleSe
                 roleResourceMapper.delete(rr);
             }
         }
-        saveRoleResource(role.getId(), resourceIds);
+        SRoleMethod roleMethod = new SRoleMethod();
+        roleMethod.setRoleId(role.getId());
+        List<SRoleMethod> roleMethods = roleMethodMapper.select(roleMethod);
+        for(SRoleMethod rm:roleMethods){
+            if(methodIds.contains(rm.getMethodId())){
+                methodIds.remove(rm.getMethodId());
+            }else{
+                roleMethodMapper.delete(rm);
+            }
+        }
+        saveRoleResource(role.getId(), resourceIds,methodIds);
     }
 
     @Override

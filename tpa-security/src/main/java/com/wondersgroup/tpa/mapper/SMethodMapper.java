@@ -25,7 +25,7 @@ public interface SMethodMapper extends WondersgroupMapper<SMethod> {
             "	UPDATE_TIME,\n" +
             "	REMARK\n" +
             "FROM S_METHOD M\n" +
-            "LEFT JOIN S_ROLE_METHOD RM ON M.ID = RM.METHOD_ID"+
-            "WHERE METHOD_ID = #{ID}")
+            "LEFT JOIN S_ROLE_METHOD RM ON M.ID = RM.METHOD_ID\n"+
+            "WHERE ROLE_ID = #{ID}")
     public List<SMethod> queryByRoleId(Long roleId);
 }

@@ -69,6 +69,17 @@
                         edithidden: true,
                         required: false
                     }
+                },
+                {
+                    label: '方法选择', name: 'methodIds', hidden: true, editable: true,edittype: "custom",
+                    editoptions: {
+                        custom_value: getMethodElementValue,
+                        custom_element: createMethodEditElement
+                    },
+                    editrules: {
+                        edithidden: true,
+                        required: false
+                    }
                 }
             ],
             viewrecords: true, // show the current page, data rang and total records on the toolbar
@@ -119,6 +130,34 @@
             return div;
         }
 
+        function createMethodEditElement(value, editOptions) {
+            var div =$("<div style='margin-bottom:5px;margin-top:-16px;'><ul id='roleMethods' class='ztree'></ul></div>");
+            var setting = {
+                check : {
+                    enable : true,
+                    chkboxType : { "Y" : "ps", "N" : "s" }
+                },
+                async : {
+                    enable : true,
+                    type: "get",
+                    url : "${request.contextPath}/system/method/queryAll.json?${_csrf.parameterName!''}=${_csrf.token!''}",
+                    dataFilter : zTreeMethodDataFormat
+                },
+                data : {
+                    simpleData : {
+                        enable : true
+                    }
+                }
+            };
+            $.fn.zTree.init(div.find("#roleMethods"), setting);
+            var rowId = editOptions.rowId;
+            if("_empty"!=rowId){
+                var rowData = $("#jqGrid").jqGrid("getRowData", rowId);
+                checkMethodNodeByRoleId(rowData.id);
+            }
+            return div;
+        }
+
         function zTreeDataFormat(treeId, parentNode, responseData) {
             var menuList = responseData;
             if(menuList.length>0) {
@@ -130,6 +169,29 @@
             }
 
             return menuList;
+        }
+        function zTreeMethodDataFormat(treeId, parentNode, responseData) {
+            var menuList = responseData;
+            if(menuList.length>0) {
+                $.each(menuList,function (index,item) {
+                    if(item.pId==null){
+                        item.open=true;
+                    }
+                    item.name=getName(item.packageName,item.className,item.methodName,item.paramName);
+                });
+            }
+
+            return menuList;
+        }
+        function getName(packageName,className,methodName,paramName){
+            if(!className||className==''){
+                name=packageName;
+            }else if(!methodName||methodName==''){
+                name = className;
+            }else{
+                name = methodName+"("+paramName+")";
+            }
+            return name;
         }
         // The javascript executed specified by JQGridColumn.EditTypeCustomGetValue when EditType = EditType.Custom
         // One parameter passed - the custom element created in JQGridColumn.EditTypeCustomCreateElement
@@ -152,9 +214,42 @@
                 return ids.join();
             }
         }
+        function getMethodElementValue(elem, oper, value) {
+            if (oper === "set") {
+
+                var id=$("#id").val();
+                if(id) {
+                    checkMethodNodeByRoleId(id);
+                }
+            }
+
+            if (oper === "get") {
+                var treeObj = $.fn.zTree.getZTreeObj("roleMethods");
+                var nodes = treeObj.getCheckedNodes(true)
+                var ids=new Array();
+                $.each(nodes,function(index,item){
+                    ids.push(item.id);
+                })
+                return ids.join();
+            }
+        }
         function checkNodeByRoleId(v_roleId) {
             $.post("${request.contextPath}/system/resource/queryByRoleId.json?${_csrf.parameterName!''}=${_csrf.token!''}", {roleId: v_roleId}, function (response, status, xhr) {
                 var treeObj = $.fn.zTree.getZTreeObj("roleResources");
+                treeObj.checkAllNodes(false);
+                var node;
+                $.each(response,function (index, item) {
+                    node  = treeObj.getNodeByParam("id", item.id, null);
+                    if(node){
+                        if(!node.isParent)
+                            treeObj.checkNode(node, true, true);
+                    }
+                })
+            }, "json")
+        }
+        function checkMethodNodeByRoleId(v_roleId) {
+            $.post("${request.contextPath}/system/method/queryByRoleId.json?${_csrf.parameterName!''}=${_csrf.token!''}", {roleId: v_roleId}, function (response, status, xhr) {
+                var treeObj = $.fn.zTree.getZTreeObj("roleMethods");
                 treeObj.checkAllNodes(false);
                 var node;
                 $.each(response,function (index, item) {

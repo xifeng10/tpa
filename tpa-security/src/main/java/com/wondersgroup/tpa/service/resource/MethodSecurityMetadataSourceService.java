@@ -61,7 +61,7 @@ public class MethodSecurityMetadataSourceService extends AbstractMethodSecurityM
                 attribute = new SecurityConfig(role.getName());
                 attributes.add(attribute);
             }
-            resourceMap.put(m.getClassName() + SHARP + m.getMethodName(), attributes);
+            resourceMap.put(m.getPackageName()+"."+m.getClassName() + SHARP + m.getMethodName(), attributes);
         }
     }
 }
