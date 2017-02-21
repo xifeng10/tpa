@@ -7,6 +7,8 @@ import com.wondersgroup.tpa.model.SMethod;
 import com.wondersgroup.tpa.model.SRole;
 import com.wondersgroup.tpa.service.IMethodService;
 import com.wondersgroup.tpa.service.IRoleService;
+import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -22,7 +24,7 @@ import org.springframework.stereotype.Service;
  *         2012-4-4 下午5:54:26
  */
 @Service
-public class MethodSecurityMetadataSourceService extends AbstractMethodSecurityMetadataSource implements MethodSecurityMetadataSource {
+public class MethodSecurityMetadataSourceService implements MethodSecurityMetadataSource {
     public static final String SHARP = "#";
     @Autowired
     private IMethodService methodService;
@@ -30,6 +32,33 @@ public class MethodSecurityMetadataSourceService extends AbstractMethodSecurityM
     private IRoleService roleService;
 
     private Map<String, Collection<ConfigAttribute>> resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
+
+    public final Collection<ConfigAttribute> getAttributes(Object object) {
+        if (object instanceof MethodInvocation) {
+            MethodInvocation mi = (MethodInvocation) object;
+            Object target = mi.getThis();
+            Class<?> targetClass = null;
+
+            if (target != null) {
+                targetClass = target instanceof Class<?> ? (Class<?>) target
+                        : AopProxyUtils.ultimateTargetClass(target);
+            }
+            Collection<ConfigAttribute> attrs = getAttributes(mi.getMethod(), targetClass);
+            if (attrs != null && !attrs.isEmpty()) {
+                return attrs;
+            }
+            if (target != null && !(target instanceof Class<?>)) {
+                attrs = getAttributes(mi.getMethod(), target.getClass());
+            }
+            return attrs;
+        }
+
+        throw new IllegalArgumentException("Object must be a non-null MethodInvocation");
+    }
+
+    public final boolean supports(Class<?> clazz) {
+        return (MethodInvocation.class.isAssignableFrom(clazz));
+    }
 
     @Override
     public Collection<ConfigAttribute> getAllConfigAttributes() {
