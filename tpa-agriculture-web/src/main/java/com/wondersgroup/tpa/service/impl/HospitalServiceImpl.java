@@ -19,11 +19,4 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class HospitalServiceImpl extends CommonServiceImpl<TpaHospital> implements IHospitalService {
-    @Autowired
-    private TpaHospitalMapper hospitalMapper;
-
-    @Override
-    public WondersgroupMapper<TpaHospital> getMapper() {
-        return hospitalMapper;
-    }
 }

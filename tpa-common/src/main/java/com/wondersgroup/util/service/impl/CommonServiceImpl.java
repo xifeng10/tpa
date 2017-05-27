@@ -7,6 +7,7 @@ import com.wondersgroup.util.util.Page;
 import com.wondersgroup.util.util.ReflectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
@@ -26,7 +27,9 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
 
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
-    public abstract WondersgroupMapper<T> getMapper();
+    @Autowired
+    private WondersgroupMapper<T> wondersgroupMapper;
+//    public abstract WondersgroupMapper<T> getMapper();
 
     protected Class<T> entityClass;
 
@@ -73,7 +76,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
 
         Example example = new Example(entityClass);
         example.createCriteria().andEqualTo(propertyName, value);
-        return getMapper().selectByExample(example);
+        return wondersgroupMapper.selectByExample(example);
     }
 
     /**
@@ -84,7 +87,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @Description: 新增
      */
     public int save(T entity) {
-        return getMapper().insert(entity);
+        return wondersgroupMapper.insert(entity);
     }
 
     /**
@@ -95,7 +98,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @Description: 根据主键删除
      */
     public int delete(T entity) {
-        return getMapper().delete(entity);
+        return wondersgroupMapper.delete(entity);
     }
 
     /**
@@ -106,7 +109,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @Description 根据主键删除对象
      */
     public int delete(Serializable id) {
-        return getMapper().deleteByPrimaryKey(id);
+        return wondersgroupMapper.deleteByPrimaryKey(id);
     }
 
     /**
@@ -118,7 +121,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @Description 根据主键获取唯一的实体
      */
     public T get(Serializable id) {
-        return getMapper().selectByPrimaryKey(id);
+        return wondersgroupMapper.selectByPrimaryKey(id);
     }
 
     /**
@@ -129,7 +132,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @Description: 修改
      */
     public int update(T entity) {
-        return getMapper().updateByPrimaryKeySelective(entity);
+        return wondersgroupMapper.updateByPrimaryKeySelective(entity);
     }
 
     /**
@@ -139,7 +142,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @Description 查询所有
      */
     public List<T> findAll() {
-        return getMapper().selectAll();
+        return wondersgroupMapper.selectAll();
     }
 
     /**
@@ -151,7 +154,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @Description 根据entity查找跟entity属性相同的实体
      */
     public List<T> findByExample(T entity) {
-        return getMapper().select(entity);
+        return wondersgroupMapper.select(entity);
     }
 
     /**
@@ -163,7 +166,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
      * @Description 批量添加
      */
     public int saveAll(List<T> List) {
-        return getMapper().insertList(List);
+        return wondersgroupMapper.insertList(List);
     }
 
     /**
@@ -186,7 +189,7 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
         if (!StringUtils.isEmpty(page.getOrderBy())) {
             example.setOrderByClause(page.getOrderBy() + " " + page.getSort());
         }
-        results = getMapper().selectByExample(example);
+        results = wondersgroupMapper.selectByExample(example);
         page.setResults(results);
         com.github.pagehelper.Page pagehelper = ((com.github.pagehelper.Page) results);
         page.setTotalSize(pagehelper.getTotal());
@@ -211,9 +214,9 @@ public abstract class CommonServiceImpl<T> implements ICommonService<T> {
             //通用Example查询
             Example example = new Example(entityClass);
             example.setOrderByClause(page.getOrderBy() + " " + page.getSort());
-            results = getMapper().selectByExample(example);
+            results = wondersgroupMapper.selectByExample(example);
         } else {
-            results = getMapper().selectAll();
+            results = wondersgroupMapper.selectAll();
         }
         page.setResults(results);
         com.github.pagehelper.Page pagehelper = ((com.github.pagehelper.Page) results);

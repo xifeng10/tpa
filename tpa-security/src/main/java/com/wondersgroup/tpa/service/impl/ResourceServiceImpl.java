@@ -27,11 +27,6 @@ public class ResourceServiceImpl extends CommonServiceImpl<SResource> implements
     @Autowired
     private SResourceMapper resourceMapper;
 
-    @Override
-    public WondersgroupMapper<SResource> getMapper() {
-        return resourceMapper;
-    }
-
     @Autowired
     private FilterInvocationSecurityMetadataSourceService metadataSourceService;
 

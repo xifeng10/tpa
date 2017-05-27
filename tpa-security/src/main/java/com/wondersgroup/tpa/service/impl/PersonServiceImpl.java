@@ -19,10 +19,4 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PersonServiceImpl extends CommonServiceImpl<SPerson> implements IPersonService{
-    @Autowired
-    private SPersonMapper personMapper;
-    @Override
-    public WondersgroupMapper<SPerson> getMapper() {
-        return personMapper;
-    }
 }

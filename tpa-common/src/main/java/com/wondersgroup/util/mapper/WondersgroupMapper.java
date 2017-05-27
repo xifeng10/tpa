@@ -37,5 +37,5 @@ import java.util.List;
  * @since 2015-09-06 21:53
  */
 public interface WondersgroupMapper<T> extends Mapper<T>, MySqlMapper<T> {
-
+    void test();
 }

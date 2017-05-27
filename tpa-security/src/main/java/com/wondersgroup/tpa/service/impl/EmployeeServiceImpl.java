@@ -36,11 +36,6 @@ public class EmployeeServiceImpl extends CommonServiceImpl<SEmployee> implements
     private SEmployeeRoleMapper employeeRoleMapper;
 
     @Override
-    public WondersgroupMapper<SEmployee> getMapper() {
-        return employeeMapper;
-    }
-
-    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SEmployee employee = findByUniqueResult("username", username);
         if (employee != null) {

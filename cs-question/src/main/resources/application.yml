@@ -1,0 +1,61 @@
+cs:
+    fileSaveDir: E:\tmp
+
+
+logging:
+    level:
+        tk.mybatis: DEBUG
+        com.ibatis: DEBUG
+        com.chuisha.mapper: DEBUG
+        com.wondersgroup.tpa.mapper: DEBUG
+        com.ibatis.common.jdbc.SimpleDataSource: debug
+        com.ibatis.common.jdbc.ScriptRunner: debug
+        com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate: debug
+        java.sql.Connection: debug
+        java.sql.Statement: debug
+        java.sql.PreparedStatement: debug
+        org.springframework.security.web: DEBUG
+spring:
+    datasource:
+        name: test
+        url: jdbc:mysql://192.168.1.10:3306/cs_ques?useUnicode=true&characterEncoding=utf8
+        username: tpa
+        password: tpa
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+    mvc:
+        view:
+            prefix: /templates/
+            suffix: .ftl
+    freemarker:
+        cache: false
+        request-context-attribute: request
+
+mybatis:
+    type-aliases-package: com.chuisha.model
+    mapper-locations: classpath:mapper/*.xml
+
+mapper:
+    mappers:
+        - com.wondersgroup.util.mapper.WondersgroupMapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql

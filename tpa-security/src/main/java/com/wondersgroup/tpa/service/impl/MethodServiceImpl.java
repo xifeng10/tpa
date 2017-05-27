@@ -33,11 +33,6 @@ public class MethodServiceImpl extends CommonServiceImpl<SMethod> implements IMe
     private MethodSecurityMetadataSourceService methodSecurityMetadataSourceService;
 
     @Override
-    public WondersgroupMapper<SMethod> getMapper() {
-        return methodMapper;
-    }
-
-    @Override
     public List<SMethod> findAll() {
         return methodMapper.selectAll();
     }

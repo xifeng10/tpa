@@ -23,7 +23,7 @@ public interface ICommonService<T> {
      * @author 陈希峰 chenxf10@126.com
      * @Description: 新增
      */
-    int save(T entity) throws Exception;
+    int save(T entity);
 
     /**
      * @param entity
@@ -33,7 +33,7 @@ public interface ICommonService<T> {
      * @author 陈希峰 chenxf10@126.com
      * @Description: 根据主键删除
      */
-    int delete(T entity) throws Exception;
+    int delete(T entity);
 
     /**
      * @param entity
@@ -43,7 +43,7 @@ public interface ICommonService<T> {
      * @author 陈希峰 chenxf10@126.com
      * @Description: 修改
      */
-    int update(T entity) throws Exception;
+    int update(T entity) ;
 
     /**
      * @param propertyName

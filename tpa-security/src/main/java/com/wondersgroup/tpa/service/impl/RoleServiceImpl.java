@@ -34,10 +34,6 @@ public class RoleServiceImpl extends CommonServiceImpl<SRole> implements IRoleSe
     private SRoleResourceMapper roleResourceMapper;
     @Autowired
     private SRoleMethodMapper roleMethodMapper;
-    @Override
-    public WondersgroupMapper<SRole> getMapper() {
-        return roleMapper;
-    }
 
     @Override
     public List<SRole> queryRolesByEmployeeId(Long employeeId) {
